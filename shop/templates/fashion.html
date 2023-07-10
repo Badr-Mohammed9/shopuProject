@@ -1,0 +1,47 @@
+{% include 'base.html' %} {% block content %} {% load static %}
+<style>
+    button{
+        outline:0;
+        border:0
+    }
+</style>
+<div class="thebody">
+  
+  <div style='margin-top:4rem' class="itemsSection">
+    <div class="itemText">
+      <p style="font-size: 2.5rem; font-weight: bold">Fashion</p>
+      <p>
+        The fashion section is a category of products that includes various clothing, shoes, and accessories. This section is popular among customers who are interested in the latest fashion trends and seek to update their wardrobe. The fashion section usually offers a wide range of styles and brands to choose from, catering to different tastes and preferences. Whether you're looking for casual wear, formal wear, or sportswear, the fashion section is the go-to place to find the latest fashion items.
+
+
+      </p>
+    </div>
+
+
+
+    <div style="margin-top: 1rem" class="container text-center">
+  
+      {% for item in items %} 
+       {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div
+        style="background-image: url('{% static "images/" %}{{ item.image }}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p style='color:white;font-weight:bold'>{{ item.name }}</p>
+              <p style='color:white;font-weight:bold'>{{ item.price }}$</p>
+            </div>
+            <div class="bottomCard"><a style='color:white;text-decoration:none' href="{% url 'detail' item.id %}">Request</a></div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

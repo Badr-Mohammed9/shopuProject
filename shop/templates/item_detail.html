@@ -1,0 +1,87 @@
+{% extends 'base.html' %} {% load static %}{% block content %}
+<style>
+  .thebody {
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    margin-left: auto;
+    margin-right: 5%;
+    margin-top: 2%;
+  }
+  .imgDiv {
+    width: 40%;
+    height: 80%;
+    background-color: grey;
+    margin: auto 0;
+    {% comment %} border: solid 0.3em green;
+    border-right-color: red; {% endcomment %}
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .detial {
+    width: 60%;
+    height: 80%;
+    margin: auto 0;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #068fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .back-button, .request-button {
+    background-color: #068fff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title fs-5" id="exampleModalLabel">Request</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Request from {{user}} has been sent successfully!
+        </div>
+        <div class="modal-footer">
+            <form action="" method='POST'>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">ok</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="thebody">
+  <div style="background-image: url('{% static "images/" %}{{ item.image }}')"
+  class="imgDiv"></div>
+  <div style='color:black;' class="detial">
+    <div style='font-size:3rem;margin-bottom:2rem'>{{ item.name }}</div>
+    <p>Price: {{ item.price }}$</p>
+    <p>Owner: {{ item.owner }}</p>
+    <p>Description: {{ item.description }}</p>
+    <p>category: {{ item.category }}</p>
+    <p>Date: {{ item.created }}</p>
+    {% if flag %}
+    <button data-bs-toggle="modal" data-bs-target="#exampleModal" style='background-color:#16FF00;color:black' class="request-button">Request</button>
+    {% endif %}
+    <button class="back-button" onclick="history.back()">Back</button>
+
+  </div>
+</div>
+{% endblock content %}

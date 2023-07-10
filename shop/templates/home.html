@@ -1,0 +1,151 @@
+{% include 'base.html' %} {% block content %} {% load static %}
+<style>
+    button{
+        outline:0;
+        border:0
+    }
+</style>
+<div class="thebody">
+  <div class="headrb">
+    <div class="leftHeadr">
+      <div class="leftText">Home</div>
+      <div class="cityTags">
+        <div class="tag">Riyadh</div>
+        <div style="background-color: gray" class="tag">Alkhobar</div>
+        <div style="background-color: gray" class="tag">Jeddah</div>
+      </div>
+    </div>
+    <div class="rightHeadr">
+      <div class="iconTag">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="iconTag">
+        <i class="fa-solid fa-filter"></i>
+      </div>
+    </div>
+  </div>
+  <div class="bodyh">
+    <div class="leftBox">
+      <div
+        style="
+          background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178087.jpg');
+        "
+        class="vbox"
+      >
+        <div class="vboxTitle">Electronics</div>
+        <button onclick="window.location.href='{% url 'Electronics' %}'" type="button" class="btn btn-light">Read more</button>      </div>
+      <div
+        style="
+          background-image: url('https://i.pinimg.com/originals/61/a6/2d/61a62d097510f0457d9080f4177b2ca4.jpg');
+        "
+        class="vbox"
+      >
+        <div style="color: " class="vboxTitle">Fashion</div>
+        <button onclick="window.location.href='{% url 'fashion' %}'" type="button" class="btn btn-light">Read more</button>
+      </div>
+    </div>
+    <div class="rightBox">
+      <div
+        style="
+          background-image: url('https://wallpapershome.com/images/pages/pic_v/18491.jpg');
+        "
+        class="hbox"
+      >
+        <div class="hboxTitle">Gaming</div>
+        <button onclick="window.location.href='{% url 'games' %}'" type="button" class="btn btn-light">Read more</button>
+      </div>
+      <div
+        style="
+          background-image: url('https://www.xtrafondos.com/wallpapers/vertical/riders-republic-extreme-sports-6205.jpg');
+        "
+        class="hbox"
+      >
+        <div class="hboxTitle">Sports</div>
+        <button onclick="window.location.href='{% url 'sports' %}'" type="button" class="btn btn-light">Read more</button>
+      </div>
+    </div>
+  </div>
+  <div class="itemsSection">
+    <div class="itemText">
+      <p style="font-size: 2.5rem; font-weight: bold">Leadrs of sells</p>
+      <p>
+        this top inclueds clothes with the highest rating <br />
+        and postive customer reviews.
+      </p>
+    </div>
+
+
+
+    <div style="margin-top: 1rem" class="container text-center">
+      {% comment %}
+      <div class="row">
+        <div
+          style="background-image: url('{% static 'images/img1.jpg' %}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p>Wool-blend Coat2</p>
+              <p>$98.10</p>
+            </div>
+            <div class="bottomCard">Add to cart</div>
+          </div>
+        </div>
+        <div
+          style="
+            background-image: url('{% static 'images/sarah-dorweiler-QeVmJxZOv3k-unsplash.jpg' %}');
+          "
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p>Wool-blend Coat2</p>
+              <p>$98.10</p>
+            </div>
+            <div class="bottomCard">Add to cart</div>
+          </div>
+        </div>
+        <div
+          style="background-image: url('{% static 'images/foodimage.jpeg' %}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p>Wool-blend Coat2</p>
+              <p>$98.10</p>
+            </div>
+            <div class="bottomCard">Add to cart</div>
+          </div>
+        </div>
+      </div>
+      {% endcomment %} 
+
+
+      {% for item in items %} 
+       {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div
+        style="background-image: url('{% static "images/" %}{{ item.image }}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p style='color:white;font-weight:bold'>{{ item.name }}</p>
+              <p style='color:white;font-weight:bold'>{{ item.price }}$</p>
+            </div>
+            <div class="bottomCard"><a style='color:white;text-decoration:none' href="{% url 'detail' item.id %}">Request</a></div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+    const itemsJson = '{{ items_json|escapejs }}';
+    const items = JSON.parse(itemsJson);
+    console.log(items)
+</script>
+{% endblock content %}

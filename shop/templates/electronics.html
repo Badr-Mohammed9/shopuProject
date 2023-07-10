@@ -1,0 +1,56 @@
+{% include 'base.html' %} {% block content %} {% load static %}
+<style>
+    button{
+        outline:0;
+        border:0
+    }
+</style>
+<div class="thebody">
+  
+  <div style='margin-top:4rem' class="itemsSection">
+    <div class="itemText">
+      <p style="font-size: 2.5rem; font-weight: bold">Electronics</p>
+      <p>
+        The electronics section is a category of products that includes various 
+         electronic devices and gadgets such as smartphones, laptops, televisions, 
+          cameras, headphones, and many more. This section is popular among 
+           tech-savvy customers who are interested in the latest technological  
+           advancements and seek to stay up-to-date with the latest trends.  
+           The electronics section usually offers a wide range of brands and  
+           models to choose from, catering to different needs and preferences.  
+           Whether you're looking for a new smartphone, a gaming laptop, 
+           or a smartwatch, the electronics section is the go-to place to find  
+           the latest and greatest electronic devices.
+
+
+      </p>
+    </div>
+
+
+
+    <div style="margin-top: 1rem" class="container text-center">
+  
+      {% for item in items %} 
+       {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div
+        style="background-image: url('{% static "images/" %}{{ item.image }}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p style='color:white;font-weight:bold'>{{ item.name }}</p>
+              <p style='color:white;font-weight:bold'>{{ item.price }}$</p>
+            </div>
+            <div class="bottomCard"><a style='color:white;text-decoration:none' href="{% url 'detail' item.id %}">Request</a></div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

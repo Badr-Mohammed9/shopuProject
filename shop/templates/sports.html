@@ -1,0 +1,46 @@
+{% include 'base.html' %} {% block content %} {% load static %}
+<style>
+    button{
+        outline:0;
+        border:0
+    }
+</style>
+<div class="thebody">
+  
+  <div style='margin-top:4rem' class="itemsSection">
+    <div class="itemText">
+      <p style="font-size: 2.5rem; font-weight: bold">Sports</p>
+      <p>
+        The sports section is a category of products that includes various sports equipment, apparel, and accessories. This section is popular among athletes and sports enthusiasts who are interested in improving their performance and staying active. The sports section usually offers a wide range of sports equipment and apparel for different sports, catering to different skill levels and preferences. Whether you're a fan of soccer, basketball, or tennis, the sports section is the go-to place to find the latest sports products.
+
+      </p>
+    </div>
+
+
+
+    <div style="margin-top: 1rem" class="container text-center">
+  
+      {% for item in items %} 
+       {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div
+        style="background-image: url('{% static "images/" %}{{ item.image }}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p style='color:white;font-weight:bold'>{{ item.name }}</p>
+              <p style='color:white;font-weight:bold'>{{ item.price }}$</p>
+            </div>
+            <div class="bottomCard"><a style='color:white;text-decoration:none' href="{% url 'detail' item.id %}">Request</a></div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

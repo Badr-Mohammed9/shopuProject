@@ -1,0 +1,46 @@
+{% include 'base.html' %} {% block content %} {% load static %}
+<style>
+    button{
+        outline:0;
+        border:0
+    }
+</style>
+<div class="thebody">
+  
+  <div style='margin-top:4rem' class="itemsSection">
+    <div class="itemText">
+      <p style="font-size: 2.5rem; font-weight: bold">Games</p>
+      <p>
+        The gaming section is a category of products that includes various video games, consoles, and gaming accessories. This section is popular among gamers who are interested in the latest gaming technology and seek to improve their gaming experience. The gaming section usually offers a wide range of game genres and console brands to choose from, catering to different gaming preferences. Whether you're a fan of action games, sports games, or role-playing games, the gaming section is the go-to place to find the latest gaming products.
+
+      </p>
+    </div>
+
+
+
+    <div style="margin-top: 1rem" class="container text-center">
+  
+      {% for item in items %} 
+       {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div
+        style="background-image: url('{% static "images/" %}{{ item.image }}')"
+          class="col item"
+        >
+          <div class="itemCard">
+            <div class="aboveCard">
+              <p style='color:white;font-weight:bold'>{{ item.name }}</p>
+              <p style='color:white;font-weight:bold'>{{ item.price }}$</p>
+            </div>
+            <div class="bottomCard"><a style='color:white;text-decoration:none' href="{% url 'detail' item.id %}">Request</a></div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
